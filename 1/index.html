@@ -83,6 +83,24 @@ console.log("VR button clicked");
 
 }
 
+  function closePopup(){
+
+document.getElementById("mobilePopup").style.display = "none";
+
+}
+
+
+window.onload = function(){
+
+if(window.innerWidth < 900){
+
+document.getElementById("mobilePopup").style.display = "flex";
+
+}
+
+}
+  
+
 </script>
 
 
@@ -111,6 +129,7 @@ use <b>fullscreen</b> for the best experience.
   
 </body>
 </html>
+
 
 
 
