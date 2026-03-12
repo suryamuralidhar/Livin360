@@ -1,52 +1,36 @@
 const CONFIG = {
 
 
-// ============================
-// PROJECT INFO
-// ============================
+// ===== PROJECT INFO =====
 
 title: "Villa Interior – Living Room",
 
 heading: "Living Room – Villa Interior",
 
-panoramaImage: "LIV2.png",
+panoramaImage: "LIV2.jpg",
 
 
-// ============================
-// POPUP SETTINGS
-// ============================
+// ===== POPUP TEXT =====
 
 popupText: `
 <b>Disclaimer</b><br><br>
-If you are viewing this on a mobile device,
-please rotate your phone to <b>landscape</b>
-and use <b>fullscreen</b> for best experience.
+If you are viewing this on a mobile device,<br>
+please rotate your phone to <b>landscape</b> and
+use <b>fullscreen</b> for the best experience.
 `,
 
 popupButton: "OK 😃",
 
-popupDelay: 1000,
+
+// ===== MOBILE SETTINGS =====
 
 mobileWidth: 900,
 
-
-// ============================
-// VIEWER SETTINGS
-// ============================
-
-dragFriction: 0.5,
+popupDelay: 1000,
 
 
-// ============================
-// COLORS
-// ============================
+// ===== VIEWER SETTINGS =====
 
-spaceBarColor: "rgba(0,0,0,0.5)",
-
-popupBackground: "white",
-
-popupOverlay: "rgba(0,0,0,0.55)",
-
-buttonColor: "#2e6f45"
+dragFriction: 0.5
 
 };
