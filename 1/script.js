@@ -1,3 +1,5 @@
+//rev 1 
+
 window.addEventListener("load", function(){
 
 console.log("Script started");
@@ -33,42 +35,39 @@ if (music) {
 
 debugBox.innerText = "Music Debug: Loading music...";
 
-/* set source only once */
-
 music.src = CONFIG.musicFile;
 music.loop = true;
 music.preload = "auto";
 
-/* apply volume */
-
-music.volume = CONFIG.musicVolume;
-
-/* load audio */
-
 music.load();
 
 music.addEventListener("canplaythrough", () => {
-debugBox.innerText = "Music Debug: Ready to play";
+debugBox.innerText = "Music Debug: Ready";
 });
 
-/* start music on first user interaction */
+function startMusic(){
 
-function startMusic() {
+if(!musicStarted){
 
-if (!musicStarted) {
+music.play().then(()=>{
 
-music.play().then(() => {
+/* APPLY VOLUME AFTER PLAY STARTS */
+
+music.volume = CONFIG.musicVolume;
 
 debugBox.innerText = "Music Debug: Playing";
+
 musicStarted = true;
 
-}).catch(err => {
-
-debugBox.innerText = "Music Debug: Autoplay blocked";
-
-console.error(err);
-
+}).catch(err=>{
+console.log(err);
 });
+
+}
+
+}
+
+document.addEventListener("click", startMusic, { once:true });
 
 }
 
