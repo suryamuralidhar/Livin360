@@ -4,17 +4,150 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Villa Interior – Living Room</title>
 
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 
-<link rel="stylesheet" href="style.css">
-  
-
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
+<style>
+
+/* PANORAMA */
+
+html,body{
+margin:0;
+height:100%;
+overflow:hidden;
+font-family:Segoe UI, sans-serif;
+}
+
+#panorama{
+width:100%;
+height:100vh;
+}
+
+/* BOTTOM SPACE BAR */
+
+.space-bar{
+
+position:fixed;
+bottom:0;
+left:0;
+
+width:100%;
+
+background:rgba(0,0,0,0.5);
+color:white;
+
+padding:16px;
+
+text-align:center;
+
+font-size:18px;
+
+backdrop-filter:blur(8px);
+
+}
+
+/* FLOATING BUTTONS */
+
+.ui-buttons{
+
+position:fixed;
+
+right:20px;
+bottom:100px;
+
+display:flex;
+flex-direction:column;
+
+gap:15px;
+
+z-index:20;
+
+}
+
+.ui-buttons button{
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+border:none;
+
+font-size:22px;
+
+color:white;
+
+background:rgba(0,0,0,0.5);
+
+cursor:pointer;
+
+}
+
+/* MOBILE POPUP */
+
+#mobilePopup{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.55);
+
+display:none;
+
+align-items:center;
+justify-content:center;
+
+z-index:9999;
+
+}
+
+.popupBox{
+
+background:white;
+
+padding:30px;
+
+border-radius:16px;
+
+max-width:320px;
+
+text-align:center;
+
+box-shadow:0 20px 60px rgba(0,0,0,0.35);
+
+}
+
+.popupBox button{
+
+margin-top:20px;
+
+padding:10px 24px;
+
+border:none;
+
+background:#2e6f45;
+
+color:white;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
@@ -34,74 +167,8 @@ Living Room – Villa Interior
 
 </div>
 
-<script>
 
-var viewer = pannellum.viewer('panorama', {
-
-"type": "equirectangular",
-"panorama": "LIV8.jpg",
-"autoLoad": true,
-"friction": 0.5,
-"showFullscreenCtrl": false
-
-});
-
-
-/* FULLSCREEN WORKING */
-
-function openFullscreen(){
-
-var elem = document.getElementById("panorama");
-
-if (elem.requestFullscreen) {
-elem.requestFullscreen();
-} 
-else if (elem.webkitRequestFullscreen) {
-elem.webkitRequestFullscreen();
-} 
-else if (elem.msRequestFullscreen) {
-elem.msRequestFullscreen();
-}
-
-}
-
-
-/* DUMMY AR BUTTON */
-
-function arMode(){
-
-console.log("AR button clicked");
-
-}
-
-
-/* DUMMY VR BUTTON */
-
-function vrMode(){
-
-console.log("VR button clicked");
-
-}
-
-function closePopup(){
-document.getElementById("mobilePopup").style.display = "none";
-}
-
-document.addEventListener("DOMContentLoaded", function(){
-
-if(window.innerWidth < 900){
-
-document.getElementById("mobilePopup").style.display = "flex";
-
-}
-
-});
-
-</script>
-
-
-
-
+<!-- MOBILE POPUP -->
 
 <div id="mobilePopup">
 
@@ -110,8 +177,7 @@ document.getElementById("mobilePopup").style.display = "flex";
 <p>
 <b>Disclaimer</b><br><br>
 If you are viewing this on a mobile device,<br>
-please rotate your phone to <b>landscape</b> and
-use <b>fullscreen</b> for the best experience.
+please rotate your phone to <b>landscape</b> and use <b>fullscreen</b> for the best experience.
 </p>
 
 <button onclick="closePopup()">OK 😃</button>
@@ -121,16 +187,62 @@ use <b>fullscreen</b> for the best experience.
 </div>
 
 
+<script>
 
-  
+/* PANNELLUM VIEWER */
+
+var viewer = pannellum.viewer('panorama', {
+
+"type": "equirectangular",
+"panorama": "LIV2.png",
+"autoLoad": true,
+"friction": 0.5
+
+});
+
+
+/* FULLSCREEN */
+
+function openFullscreen(){
+
+var elem = document.getElementById("panorama");
+
+if (elem.requestFullscreen) {
+elem.requestFullscreen();
+}
+
+}
+
+
+/* DUMMY BUTTONS */
+
+function arMode(){}
+
+function vrMode(){}
+
+
+/* CLOSE POPUP */
+
+function closePopup(){
+
+document.getElementById("mobilePopup").style.display="none";
+
+}
+
+
+/* SHOW POPUP FOR MOBILE */
+
+setTimeout(function(){
+
+if(window.innerWidth < 900){
+
+document.getElementById("mobilePopup").style.display="flex";
+
+}
+
+},1000);
+
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
