@@ -22,10 +22,12 @@ friction: CONFIG.dragFriction
 });
 
 
-/* MUSIC DEBUG */
+/* ===== MUSIC ===== */
 
 const debugBox = document.getElementById("musicDebug");
 const music = document.getElementById("bgMusic");
+
+let musicStarted = false;
 
 if(music){
 
@@ -42,18 +44,28 @@ music.addEventListener("playing", ()=>{
 debugBox.innerText = "Music Debug: Playing";
 });
 
+music.addEventListener("ended", ()=>{
+debugBox.innerText = "Music Debug: Track Ended";
+});
+
 music.addEventListener("error", ()=>{
 debugBox.innerText = "Music Debug: Error loading music";
 });
 
-/* play after user interaction */
 
-document.addEventListener("click", function startMusic(){
+/* start music only ONCE */
+
+document.addEventListener("click", function(){
+
+if(!musicStarted){
 
 music.play();
+
+musicStarted = true;
+
 debugBox.innerText = "Music Debug: Playing";
 
-document.removeEventListener("click", startMusic);
+}
 
 });
 
