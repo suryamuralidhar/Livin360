@@ -1,13 +1,10 @@
-//Rev2
-
-
 const CONFIG = {
 
 title: "Villa Interior – Living Room",
 
 heading: "Living Room – Villa Interior",
 
-panoramaImage: "1.png",
+panoramaImage: "images/1.png",
 
 popupText: `
 <b>Disclaimer</b><br><br>
@@ -22,15 +19,10 @@ mobileWidth: 900,
 
 popupDelay: 1000,
 
-dragFriction: 0.5
+dragFriction: 0.5,
 
+musicFile: "music/1.mp3",
 
-  musicFile: "music/1.mp3",
+musicVolume: 0.4
 
-musicVolume: 0.4,
 };
-
-
-
-
-
