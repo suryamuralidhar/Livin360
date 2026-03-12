@@ -4,7 +4,7 @@ title: "Villa Interior – Living Room",
 
 heading: "Living Room – Villa Interior",
 
-panoramaImage: "1.png",
+panoramaImage: "1.jpg",
 
 dragFriction: 0.5,
 
@@ -14,6 +14,7 @@ musicVolume: 0.02
   
 
 };
+
 
 
 
