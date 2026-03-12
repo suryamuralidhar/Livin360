@@ -49,18 +49,21 @@ href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 </div>
 
 
-<script>
+
+
+  <script>
+
+document.addEventListener("DOMContentLoaded", function(){
 
 /* APPLY CONFIG VALUES */
 
 document.title = CONFIG.title;
-document.getElementById("pageTitle").innerText = CONFIG.title;
 document.getElementById("spaceBar").innerText = CONFIG.heading;
 document.getElementById("popupText").innerHTML = CONFIG.popupText;
 document.getElementById("popupButton").innerText = CONFIG.popupButton;
 
 
-/* VIEWER */
+/* START VIEWER */
 
 var viewer = pannellum.viewer('panorama', {
 
@@ -68,6 +71,21 @@ var viewer = pannellum.viewer('panorama', {
 "panorama": CONFIG.panoramaImage,
 "autoLoad": true,
 "friction": CONFIG.dragFriction
+
+});
+
+
+/* MOBILE POPUP */
+
+setTimeout(function(){
+
+if(window.innerWidth < CONFIG.mobileWidth){
+
+document.getElementById("mobilePopup").style.display="flex";
+
+}
+
+},CONFIG.popupDelay);
 
 });
 
@@ -85,38 +103,25 @@ elem.requestFullscreen();
 }
 
 
-/* DUMMY BUTTONS */
+/* BUTTONS */
 
 function arMode(){}
-
 function vrMode(){}
 
 
 /* CLOSE POPUP */
 
 function closePopup(){
-
 document.getElementById("mobilePopup").style.display="none";
-
 }
-
-
-/* MOBILE CHECK */
-
-setTimeout(function(){
-
-if(window.innerWidth < CONFIG.mobileWidth){
-
-document.getElementById("mobilePopup").style.display="flex";
-
-}
-
-},CONFIG.popupDelay);
 
 </script>
 
+  
+
 </body>
 </html>
+
 
 
 
