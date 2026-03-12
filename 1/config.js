@@ -10,10 +10,11 @@ dragFriction: 0.5,
 
 musicFile: "music/1.mp3",
 
-musicVolume: 0.02
+musicVolume: 0.04
   
 
 };
+
 
 
 
