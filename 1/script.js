@@ -22,52 +22,61 @@ friction: CONFIG.dragFriction
 });
 
 
-/* ===== MUSIC ===== */
+/* ===== BACKGROUND MUSIC ===== */
 
 const debugBox = document.getElementById("musicDebug");
 const music = document.getElementById("bgMusic");
 
 let musicStarted = false;
 
-if(music){
+if (music) {
 
-debugBox.innerText = "Music Debug: Loading file...";
+debugBox.innerText = "Music Debug: Loading music...";
+
+/* set source only once */
 
 music.src = CONFIG.musicFile;
+music.loop = true;
+music.preload = "auto";
+
+/* apply volume */
+
 music.volume = CONFIG.musicVolume;
 
-music.addEventListener("loadeddata", ()=>{
-debugBox.innerText = "Music Debug: File Loaded";
+/* load audio */
+
+music.load();
+
+music.addEventListener("canplaythrough", () => {
+debugBox.innerText = "Music Debug: Ready to play";
 });
 
-music.addEventListener("playing", ()=>{
+/* start music on first user interaction */
+
+function startMusic() {
+
+if (!musicStarted) {
+
+music.play().then(() => {
+
 debugBox.innerText = "Music Debug: Playing";
-});
-
-music.addEventListener("ended", ()=>{
-debugBox.innerText = "Music Debug: Track Ended";
-});
-
-music.addEventListener("error", ()=>{
-debugBox.innerText = "Music Debug: Error loading music";
-});
-
-
-/* start music only ONCE */
-
-document.addEventListener("click", function(){
-
-if(!musicStarted){
-
-music.play();
-
 musicStarted = true;
 
-debugBox.innerText = "Music Debug: Playing";
+}).catch(err => {
+
+debugBox.innerText = "Music Debug: Autoplay blocked";
+
+console.error(err);
+
+});
 
 }
 
-});
+}
+
+/* only once */
+
+document.addEventListener("click", startMusic, { once: true });
 
 }
 
