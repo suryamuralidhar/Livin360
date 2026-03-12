@@ -11,9 +11,9 @@ panoramaImage: "1.png",
 
 popupText: `
 <b>Disclaimer</b><br><br>
-If you are viewing this on a mobile device,
-please rotate your phone to <b>landscape</b>
-and use <b>fullscreen</b> for the best experience.
+You are viewing this on a mobile device,
+please rotate your phone to <b>Landscape</b>
+and use <b>Fullscreen</b> for the best experience.
 `,
 
 popupButton: "OK 😃",
@@ -25,4 +25,5 @@ popupDelay: 1000,
 dragFriction: 0.5
 
 };
+
 
