@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Villa Interior – Living Room</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+
+<link rel="stylesheet" href="style.css">
+  
+
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+</head>
+
+<body>
+
+<div id="panorama"></div>
+
+<div class="space-bar">
+Living Room – Villa Interior
+</div>
+
+<div class="ui-buttons">
+
+<button onclick="arMode()">📱</button>
+
+<button onclick="vrMode()">🥽</button>
+
+<button onclick="openFullscreen()">⛶</button>
+
+</div>
+
+<script>
+
+var viewer = pannellum.viewer('panorama', {
+
+"type": "equirectangular",
+"panorama": "LIV8.jpg",
+"autoLoad": true,
+"friction": 0.5,
+"showFullscreenCtrl": false
+
+});
+
+
+/* FULLSCREEN WORKING */
+
+function openFullscreen(){
+
+var elem = document.getElementById("panorama");
+
+if (elem.requestFullscreen) {
+elem.requestFullscreen();
+} 
+else if (elem.webkitRequestFullscreen) {
+elem.webkitRequestFullscreen();
+} 
+else if (elem.msRequestFullscreen) {
+elem.msRequestFullscreen();
+}
+
+}
+
+
+/* DUMMY AR BUTTON */
+
+function arMode(){
+
+console.log("AR button clicked");
+
+}
+
+
+/* DUMMY VR BUTTON */
+
+function vrMode(){
+
+console.log("VR button clicked");
+
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
