@@ -11,11 +11,11 @@
 href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-<script src="config.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
 
 <style>
-
-/* ===== BASIC PAGE ===== */
 
 html,body{
 margin:0;
@@ -29,283 +29,98 @@ width:100%;
 height:100vh;
 }
 
-
-/* ===== BOTTOM SPACE BAR ===== */
-
 .space-bar{
 position:fixed;
 bottom:0;
 left:0;
-
 width:100%;
-
 padding:16px;
-
 text-align:center;
-
 font-size:18px;
-
 background:rgba(0,0,0,0.5);
 color:white;
-
-backdrop-filter:blur(8px);
 }
-
-
-/* ===== FLOATING BUTTONS ===== */
 
 .ui-buttons{
 position:fixed;
-
 right:20px;
 bottom:100px;
-
 display:flex;
 flex-direction:column;
-
 gap:15px;
-
 z-index:10;
 }
 
 .ui-buttons button{
-
 width:55px;
 height:55px;
-
 border-radius:50%;
 border:none;
-
 font-size:22px;
-
 color:white;
-
 background:rgba(0,0,0,0.5);
-
 cursor:pointer;
-
 }
 
-
-/* ===== MOBILE POPUP ===== */
-
 #mobilePopup{
-
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
 background:rgba(0,0,0,0.55);
-
 display:none;
-
 align-items:center;
 justify-content:center;
-
 z-index:9999;
-
 }
 
 .popupBox{
-
 background:white;
-
 padding:30px;
-
 border-radius:16px;
-
 max-width:320px;
-
 text-align:center;
-
-box-shadow:0 20px 60px rgba(0,0,0,0.35);
-
 }
 
-.popupBox button{
-
-margin-top:20px;
-
-padding:10px 24px;
-
-border:none;
-
-background:#2e6f45;
-
-color:white;
-
-border-radius:8px;
-
-cursor:pointer;
-
+#musicDebug{
+position:fixed;
+top:10px;
+left:10px;
+background:black;
+color:#00ff9c;
+padding:8px 12px;
+font-family:monospace;
+font-size:12px;
+z-index:99999;
+border-radius:6px;
+opacity:0.8;
 }
 
 </style>
 
 </head>
 
-
 <body>
 
 <div id="panorama"></div>
-<audio id="bgMusic" loop>
-<source src="" type="audio/mpeg">
-</audio>
+
+<audio id="bgMusic" loop></audio>
+
+<div id="musicDebug">Music Debug: Initializing...</div>
+
 <div class="space-bar" id="spaceBar"></div>
 
 <div class="ui-buttons">
-
-<button onclick="arMode()">📱</button>
-<button onclick="vrMode()">🥽</button>
 <button onclick="openFullscreen()">⛶</button>
-
 </div>
-
-
-<!-- ===== MOBILE POPUP ===== -->
 
 <div id="mobilePopup">
-
 <div class="popupBox">
-
 <p id="popupText"></p>
-
 <button onclick="closePopup()" id="popupButton"></button>
-
+</div>
 </div>
 
-</div>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-/* ===== APPLY CONFIG VALUES ===== */
-
-document.title = CONFIG.title;
-document.getElementById("spaceBar").innerText = CONFIG.heading;
-document.getElementById("popupText").innerHTML = CONFIG.popupText;
-document.getElementById("popupButton").innerText = CONFIG.popupButton;
-
-
-/* ===== START VIEWER ===== */
-
-pannellum.viewer('panorama', {
-
-"type": "equirectangular",
-"panorama": CONFIG.panoramaImage,
-"autoLoad": true,
-"friction": CONFIG.dragFriction
-
-});
-
-
-/* ===== MOBILE POPUP ===== */
-
-setTimeout(function(){
-
-if(window.innerWidth < CONFIG.mobileWidth){
-
-document.getElementById("mobilePopup").style.display="flex";
-
-}
-
-},CONFIG.popupDelay);
-
-});
-
-
-/* ===== FULLSCREEN ===== */
-
-function openFullscreen(){
-
-var elem = document.getElementById("panorama");
-
-if (elem.requestFullscreen) {
-elem.requestFullscreen();
-}
-
-}
-
-
-/* ===== DUMMY BUTTONS ===== */
-
-function arMode(){}
-function vrMode(){}
-
-
-/* ===== CLOSE POPUP ===== */
-
-function closePopup(){
-
-document.getElementById("mobilePopup").style.display="none";
-
-}
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div id="musicDebug" style="
-position:fixed;
-top:10px;
-left:10px;
-background:black;
-color:#00ff9c;
-padding:10px 14px;
-font-size:12px;
-font-family:monospace;
-z-index:99999;
-border-radius:6px;
-opacity:0.8;
-">
-Music Debug: Initializing...
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 </body>
 </html>
-
-
