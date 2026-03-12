@@ -1,39 +1,60 @@
-//rev 2
+//rev 3
 
 window.addEventListener("load", function(){
 
-console.log("Script started");
+/* ---------- DEBUG PANEL ---------- */
 
-/* Apply config */
+const debugBox = document.getElementById("musicDebug");
+function debug(msg){
+    if(debugBox) debugBox.innerText = msg;
+}
+
+debug("Music Debug: Script loaded");
+
+
+/* ---------- APPLY CONFIG ---------- */
+
+if(typeof CONFIG === "undefined"){
+    debug("Music Debug: CONFIG not found");
+    return;
+}
 
 document.title = CONFIG.title;
 
 const spaceBar = document.getElementById("spaceBar");
 if(spaceBar){
-spaceBar.innerText = CONFIG.heading;
+    spaceBar.innerText = CONFIG.heading;
 }
 
 
-/* Start panorama viewer */
+/* ---------- START PANORAMA VIEWER ---------- */
 
-pannellum.viewer('panorama', {
-type: "equirectangular",
-panorama: CONFIG.panoramaImage,
-autoLoad: true,
-friction: CONFIG.dragFriction
-});
+try{
+
+    pannellum.viewer("panorama", {
+        type: "equirectangular",
+        panorama: CONFIG.panoramaImage,
+        autoLoad: true,
+        friction: CONFIG.dragFriction
+    });
+
+    debug("Music Debug: Viewer started");
+
+}catch(e){
+
+    debug("Music Debug: Viewer error");
+    console.error(e);
+}
 
 
-/* ===== BACKGROUND MUSIC ===== */
+/* ---------- MUSIC SYSTEM ---------- */
 
-const debugBox = document.getElementById("musicDebug");
 const music = document.getElementById("bgMusic");
 
-let musicStarted = false;
-
-if (music) {
-
-debugBox.innerText = "Music Debug: Loading music...";
+if(!music){
+    debug("Music Debug: Audio element missing");
+    return;
+}
 
 music.src = CONFIG.musicFile;
 music.loop = true;
@@ -41,53 +62,55 @@ music.preload = "auto";
 
 music.load();
 
-music.addEventListener("canplaythrough", () => {
-debugBox.innerText = "Music Debug: Ready";
+music.addEventListener("canplaythrough", ()=>{
+    debug("Music Debug: Audio ready");
 });
 
-function startMusic(){
-
-if(!musicStarted){
-
-music.play().then(()=>{
-
-/* APPLY VOLUME AFTER PLAY STARTS */
-
-music.volume = CONFIG.musicVolume;
-
-debugBox.innerText = "Music Debug: Playing";
-
-musicStarted = true;
-
-}).catch(err=>{
-console.log(err);
+music.addEventListener("error", ()=>{
+    debug("Music Debug: Audio error");
 });
 
-}
 
-}
+/* ---------- START MUSIC ON FIRST CLICK ---------- */
 
-document.addEventListener("click", startMusic, { once:true });
+let started = false;
 
-}
+document.addEventListener("click", function(){
 
-}
+    if(started) return;
 
-/* only once */
+    music.play().then(()=>{
 
-document.addEventListener("click", startMusic, { once: true });
+        /* APPLY VOLUME AFTER PLAY */
 
-}
+        music.volume = CONFIG.musicVolume;
+
+        debug("Music Debug: Playing");
+
+        started = true;
+
+    }).catch(err=>{
+
+        debug("Music Debug: Autoplay blocked");
+
+        console.error(err);
+
+    });
 
 });
 
+
+});
+
+
+/* ---------- FULLSCREEN BUTTON ---------- */
 
 function openFullscreen(){
 
-var elem = document.getElementById("panorama");
+const elem = document.getElementById("panorama");
 
 if(elem.requestFullscreen){
-elem.requestFullscreen();
+    elem.requestFullscreen();
 }
 
 }
