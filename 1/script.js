@@ -1,6 +1,6 @@
 window.addEventListener("load", function(){
 
-console.log("360 viewer starting...");
+console.log("Script started");
 
 /* Apply config */
 
@@ -14,17 +14,13 @@ spaceBar.innerText = CONFIG.heading;
 
 /* Start panorama viewer */
 
-const viewer = pannellum.viewer('panorama', {
-
+pannellum.viewer('panorama', {
 type: "equirectangular",
 panorama: CONFIG.panoramaImage,
 autoLoad: true,
 friction: CONFIG.dragFriction
-
 });
 
-
-/* MUSIC DEBUG */
 
 /* MUSIC DEBUG */
 
@@ -42,16 +38,36 @@ music.addEventListener("loadeddata", ()=>{
 debugBox.innerText = "Music Debug: File Loaded";
 });
 
-/* start music after user interaction */
+music.addEventListener("playing", ()=>{
+debugBox.innerText = "Music Debug: Playing";
+});
+
+music.addEventListener("error", ()=>{
+debugBox.innerText = "Music Debug: Error loading music";
+});
+
+/* play after user interaction */
 
 document.addEventListener("click", function startMusic(){
 
 music.play();
-
 debugBox.innerText = "Music Debug: Playing";
 
 document.removeEventListener("click", startMusic);
 
 });
+
+}
+
+});
+
+
+function openFullscreen(){
+
+var elem = document.getElementById("panorama");
+
+if(elem.requestFullscreen){
+elem.requestFullscreen();
+}
 
 }
