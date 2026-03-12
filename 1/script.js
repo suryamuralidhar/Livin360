@@ -1,19 +1,20 @@
 window.addEventListener("load", function(){
 
+console.log("360 viewer starting...");
+
 /* Apply config */
 
 document.title = CONFIG.title;
 
-document.getElementById("spaceBar").innerText = CONFIG.heading;
-
-document.getElementById("popupText").innerHTML = CONFIG.popupText;
-
-document.getElementById("popupButton").innerText = CONFIG.popupButton;
+const spaceBar = document.getElementById("spaceBar");
+if(spaceBar){
+spaceBar.innerText = CONFIG.heading;
+}
 
 
 /* Start panorama viewer */
 
-pannellum.viewer('panorama', {
+const viewer = pannellum.viewer('panorama', {
 
 type: "equirectangular",
 panorama: CONFIG.panoramaImage,
@@ -23,7 +24,7 @@ friction: CONFIG.dragFriction
 });
 
 
-/* ===== BACKGROUND MUSIC DEBUG ===== */
+/* MUSIC DEBUG */
 
 const debugBox = document.getElementById("musicDebug");
 
@@ -38,47 +39,32 @@ music.src = CONFIG.musicFile;
 music.volume = CONFIG.musicVolume;
 
 music.addEventListener("loadeddata", ()=>{
-debugBox.innerText = "Music Debug: File Loaded ✅";
+debugBox.innerText = "Music Debug: File Loaded";
 });
 
 music.addEventListener("playing", ()=>{
-debugBox.innerText = "Music Debug: Playing ▶️";
+debugBox.innerText = "Music Debug: Playing";
 });
 
 music.addEventListener("error", ()=>{
-debugBox.innerText = "Music Debug: Error loading music ❌";
+debugBox.innerText = "Music Debug: Error loading music";
 });
 
-music.play().then(()=>{
-
-debugBox.innerText = "Music Debug: Autoplay started ▶️";
-
-}).catch(()=>{
-
-debugBox.innerText = "Music Debug: Autoplay blocked ⚠️ Tap screen";
-
+music.play().catch(()=>{
+debugBox.innerText = "Music Debug: Autoplay blocked (tap screen)";
 });
 
 }
 
 });
 
-
-/* Fullscreen */
 
 function openFullscreen(){
 
 var elem = document.getElementById("panorama");
 
-if (elem.requestFullscreen) {
+if(elem.requestFullscreen){
 elem.requestFullscreen();
 }
 
-}
-
-
-/* Popup close */
-
-function closePopup(){
-document.getElementById("mobilePopup").style.display="none";
 }
