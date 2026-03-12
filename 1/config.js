@@ -24,6 +24,13 @@ popupDelay: 1000,
 
 dragFriction: 0.5
 
+
+  musicFile: "music/1.mp3",
+
+musicVolume: 0.4,
 };
+
+
+
 
 
